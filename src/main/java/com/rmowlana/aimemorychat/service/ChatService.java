@@ -1,5 +1,6 @@
 package com.rmowlana.aimemorychat.service;
 
+import com.rmowlana.aimemorychat.dto.ChatResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +11,7 @@ public class ChatService {
         this.aiService = aiService;
     }
 
-    public String chat(String prompt, String userId) {
+    public ChatResponse chat(String prompt, String userId) {
         return aiService.chat(prompt, userId);
     }
 }

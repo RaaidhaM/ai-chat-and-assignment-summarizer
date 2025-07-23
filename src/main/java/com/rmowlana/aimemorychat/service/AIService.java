@@ -5,6 +5,7 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.stereotype.Service;
+import com.rmowlana.aimemorychat.dto.ChatResponse;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,11 +25,12 @@ public class AIService {
         );
     }
 
-    public String chat(String prompt, String userId) {
+    public ChatResponse chat(String prompt, String userId) {
         ChatMemory memory = getOrCreateMemory(userId);
         ChatClient chatClient = builder
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(memory).build())
                 .build();
-        return chatClient.prompt(prompt).call().content();
+        String answer = chatClient.prompt(prompt).call().content();
+        return new ChatResponse(prompt, answer);
     }
 }
