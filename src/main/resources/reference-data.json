@@ -1,0 +1,44 @@
+{
+  "course": {
+    "title": "Introduction to Computer Science",
+    "code": "CS101",
+    "instructor": "Dr. Jane Smith",
+    "description": "A foundational course covering programming basics, algorithms, and data structures",
+    "schedule": "Monday, Wednesday 10:00-11:30 AM",
+    "location": "Science Building, Room 305",
+    "prerequisites": ["None"],
+    "credits": 3
+  },
+  "assignments": [
+    {
+      "id": 1,
+      "title": "Programming Fundamentals",
+      "description": "Implement basic algorithms in Java including sorting and searching",
+      "dueDate": "2025-09-15",
+      "totalPoints": 100,
+      "submissionFormat": "GitHub repository link"
+    },
+    {
+      "id": 2,
+      "title": "Data Structures Implementation",
+      "description": "Build your own linked list and binary search tree classes",
+      "dueDate": "2025-10-20",
+      "totalPoints": 150,
+      "submissionFormat": "Source code with unit tests"
+    }
+  ],
+  "resources": {
+    "textbook": "Introduction to Algorithms by Cormen et al.",
+    "onlineResources": [
+      {
+        "name": "Course Website",
+        "url": "https://university.edu/cs101"
+      },
+      {
+        "name": "Discussion Forum",
+        "url": "https://forum.university.edu/cs101"
+      }
+    ],
+    "officeHours": "Tuesday, Thursday 1:00-3:00 PM"
+  }
+}
