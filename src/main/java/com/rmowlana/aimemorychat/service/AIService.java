@@ -42,10 +42,10 @@ public class AIService {
                     .call()
                     .content();
 
-            return new ChatResponse(prompt, answer);
+            return new ChatResponse(answer);
         }catch (Exception e) {
             log.error("Error during chat processing", e);
-            return new ChatResponse(prompt, "Sorry, I encountered an error processing your request.");
+            return new ChatResponse("Sorry, I encountered an error processing your request.");
         }
     }
 }
