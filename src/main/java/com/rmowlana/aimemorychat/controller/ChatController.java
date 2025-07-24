@@ -17,8 +17,8 @@ public class ChatController {
     }
 
     @PostMapping
-    public ResponseEntity<ChatResponse> chat(@RequestBody ChatRequest chatRequest) {
-        ChatResponse response =  chatService.chat(chatRequest.getPrompt(), chatRequest.getUserId());
+    public ResponseEntity<String> chat(@RequestBody ChatRequest chatRequest) {
+        String response =  chatService.chat(chatRequest.getPrompt(), chatRequest.getUserId());
         return ResponseEntity.ok(response);
     }
 }

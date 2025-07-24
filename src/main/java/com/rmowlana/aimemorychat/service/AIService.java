@@ -25,7 +25,7 @@ public class AIService {
         this.chatMemoryService = chatMemoryService;
     }
 
-    public ChatResponse chat(String prompt, String userId) {
+    public String chat(String prompt, String userId) {
         try {
             ChatMemory memory = chatMemoryService.getOrCreateMemory(userId);
             ChatClient chatClient = builder
@@ -36,16 +36,16 @@ public class AIService {
             String finalPrompt = systemPrompt + referenceContentService.getReferenceContent();
 
             // Use call with system message and user prompt
-            String answer = chatClient.prompt()
+            return chatClient.prompt()
                     .system(finalPrompt)
                     .user(prompt)
                     .call()
                     .content();
+//                    .replaceAll("\\r?\\n", "");
 
-            return new ChatResponse(answer);
         }catch (Exception e) {
             log.error("Error during chat processing", e);
-            return new ChatResponse("Sorry, I encountered an error processing your request.");
+            return "Sorry, I encountered an error processing your request.";
         }
     }
 }
