@@ -1,0 +1,319 @@
+{
+  "usersAssessments": [
+    {
+      "firstName": "Aiden",
+      "lastName": "Collins",
+      "loginName": "aiden.collins@yopmail.com",
+      "assessmentId": "9d45c23a622a0c15b8703dd43dddfa9b0a963b558ea8586e644029c27b5ae0a1",
+      "ltiUserId": "45a8d25e7e090bef7d450f91041a28db7a5f53a1",
+      "score": 1.0,
+      "studentScore": null,
+      "timeSpent": 306993,
+      "sectionKeys": [
+        "c326e8f4-f170-4684-851c-087956289eb6"
+      ],
+      "syncStatus": "success"
+    },
+    {
+      "firstName": "Emma",
+      "lastName": "Dawson",
+      "loginName": "emma.dawson@yopmail.com",
+      "assessmentId": "5b79b0487b13ba8a0ec94b1af72592b62bd39f2001dcf237a4609ecabdf922a8",
+      "ltiUserId": "3d768cc8a21fea5e362cc71d428f71f50cebf66d",
+      "score": 0.885,
+      "studentScore": null,
+      "timeSpent": 638498,
+      "sectionKeys": [
+        "c326e8f4-f170-4684-851c-087956289eb6"
+      ],
+      "syncStatus": "success"
+    },
+    {
+      "firstName": "Lucas",
+      "lastName": "Morgan",
+      "loginName": "lucas.morgan@yopmail.com",
+      "assessmentId": "5e1bae6c9076d7414280dec51f5167912dca7b1e39f3ae35796231d3bf500ead",
+      "ltiUserId": "b616ca6f2a54d3cd1e05f79c1821f083419f5f15",
+      "score": 0.4480000000000001,
+      "studentScore": null,
+      "timeSpent": 574334,
+      "sectionKeys": [
+        "c326e8f4-f170-4684-851c-087956289eb6"
+      ],
+      "syncStatus": "success"
+    },
+    {
+      "firstName": "Liam",
+      "lastName": "Parker",
+      "loginName": "liam.parker@yopmail.com",
+      "assessmentId": "e36acfffc5ae737d50a1293d8e13cc4707f77adf051da2b3c9ea83369f3c3037",
+      "ltiUserId": "de67e9e392a919d4909af0b3ec950a04d78edf8d",
+      "score": 0.9949999999999999,
+      "studentScore": null,
+      "timeSpent": 268998,
+      "sectionKeys": [
+        "c326e8f4-f170-4684-851c-087956289eb6"
+      ],
+      "syncStatus": "success"
+    },
+    {
+      "firstName": "Olivia",
+      "lastName": "Turner",
+      "loginName": "olivia.turner@yopmail.com",
+      "assessmentId": "f9db65b865c273b0fbc0c392b9fd64bb81044e6b4914694e044a2a5e396a26b7",
+      "ltiUserId": "4e60821bb23beee4d2246b847fe68a821dbc08ab",
+      "score": 0.45,
+      "studentScore": null,
+      "timeSpent": 812333,
+      "sectionKeys": [
+        "c326e8f4-f170-4684-851c-087956289eb6"
+      ],
+      "syncStatus": "success"
+    }
+  ],
+  "totalUserAssessments": 5,
+  "questionItems": [
+    {
+      "itemCardId": "f8f2719a-a020-4d7f-bd5f-d4b521f3feb6",
+      "itemId": "31e97ec7-1778-4300-bad9-713881143b39",
+      "title": "Testbank Question 2.12",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "13ed65bf-f986-420d-85cf-3eb6c92b9a77"
+      ],
+      "type": 0,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "e54cd8da-62a8-4fa1-8be4-37ceed5f906b",
+      "itemId": "1d5d832b-ac7e-44b8-90ca-bbf42d3168b1",
+      "title": "Practice Question 1.26",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "16c75de2-221b-4cd0-a901-94a2a2b81668"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "37ed5f4c-0117-4c22-8ba9-fd846e8d8121",
+      "itemId": "3a1532b4-db2f-465a-957e-4da0d1bbd2c4",
+      "title": "Testbank Question 1.47",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "16c75de2-221b-4cd0-a901-94a2a2b81668"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "02d853c3-4fa3-4915-b0e2-bd2da9e8a9a9",
+      "itemId": "bb4e03e9-e92e-4d4a-9b64-7ada65a760bd",
+      "title": "Decision Dilemma Question 2.01",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "01c29da0-8c38-417d-a27e-7a48be10c698"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "c081d795-fc07-4452-a9b5-bb13718ed01e",
+      "itemId": "e7640c2e-b341-4fff-935c-21b899474eb4",
+      "title": "Decision Dilemma Question 2.02",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "01c29da0-8c38-417d-a27e-7a48be10c698"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "e7debcbd-456c-4112-a2d8-96f1fbb763b8",
+      "itemId": "bc9683bc-a651-4831-88f4-ca2b68c5de6a",
+      "title": "Decision Dilemma Question 2.03",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "01c29da0-8c38-417d-a27e-7a48be10c698"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "0528d724-a66d-4028-8653-0bc7fb1eb8db",
+      "itemId": "215a9e97-5ed6-4d8e-9c3a-7846d2e2da09",
+      "title": "Decision Dilemma Question 2.04",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "01c29da0-8c38-417d-a27e-7a48be10c698"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "73bbde16-75c8-4f4d-9545-d413de583edb",
+      "itemId": "96742a6c-9dd3-47e6-bae2-abf61a32a563",
+      "title": "Practice Question 1.34",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "78df4ac9-a892-4d7e-bf19-d963991fc873"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "e4e985ef-ec99-4cc1-b1d7-662fdcb125b3",
+      "itemId": "6336386b-9ac3-43b9-8d8d-85713c39f522",
+      "title": "Practice Question 1.35",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "78df4ac9-a892-4d7e-bf19-d963991fc873"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    },
+    {
+      "itemCardId": "8b831198-2d43-4915-a881-5c69586bca2b",
+      "itemId": "2f37e9e5-dc34-4422-976c-4585b655bbb1",
+      "title": "Practice Question 1.40",
+      "multipart": false,
+      "itemType": "qCard",
+      "score": 1.0,
+      "orgItems": [
+        "78df4ac9-a892-4d7e-bf19-d963991fc873"
+      ],
+      "type": 1,
+      "published": true,
+      "deleted": false
+    }
+  ],
+  "questionSummaryResults": [
+    {
+      "maItemId": "215a9e97-5ed6-4d8e-9c3a-7846d2e2da09",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 91167
+      }
+    },
+    {
+      "maItemId": "31e97ec7-1778-4300-bad9-713881143b39",
+      "summaryResults": {
+        "correct": 5,
+        "incorrect": 0,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 21263
+      }
+    },
+    {
+      "maItemId": "2f37e9e5-dc34-4422-976c-4585b655bbb1",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 89742
+      }
+    },
+    {
+      "maItemId": "bb4e03e9-e92e-4d4a-9b64-7ada65a760bd",
+      "summaryResults": {
+        "correct": 3,
+        "incorrect": 2,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 39621
+      }
+    },
+    {
+      "maItemId": "bc9683bc-a651-4831-88f4-ca2b68c5de6a",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 15192
+      }
+    },
+    {
+      "maItemId": "3a1532b4-db2f-465a-957e-4da0d1bbd2c4",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 80316
+      }
+    },
+    {
+      "maItemId": "96742a6c-9dd3-47e6-bae2-abf61a32a563",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 32386
+      }
+    },
+    {
+      "maItemId": "6336386b-9ac3-43b9-8d8d-85713c39f522",
+      "summaryResults": {
+        "correct": 3,
+        "incorrect": 2,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 61231
+      }
+    },
+    {
+      "maItemId": "1d5d832b-ac7e-44b8-90ca-bbf42d3168b1",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 40165
+      }
+    },
+    {
+      "maItemId": "e7640c2e-b341-4fff-935c-21b899474eb4",
+      "summaryResults": {
+        "correct": 4,
+        "incorrect": 1,
+        "partiallyCorrect": 0,
+        "needToBeGraded": 0,
+        "averageTimeSpent": 49144
+      }
+    }
+  ]
+}

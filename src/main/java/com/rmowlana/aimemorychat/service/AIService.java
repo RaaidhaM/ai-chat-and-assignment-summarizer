@@ -1,36 +1,51 @@
 package com.rmowlana.aimemorychat.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import com.rmowlana.aimemorychat.dto.ChatResponse;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 @Service
+@Slf4j
 public class AIService {
     private final ChatClient.Builder builder;
-    private final Map<String, ChatMemory> userMemories = new ConcurrentHashMap<>();
+    private final ReferenceContentService referenceContentService;
+    private final ChatMemoryService chatMemoryService;
 
-    public AIService(ChatClient.Builder builder) {
+    @Value("${ai.system.prompt.template}")
+    private String systemPrompt;
+
+    public AIService(ChatClient.Builder builder, ReferenceContentService referenceContentService, ChatMemoryService chatMemoryService) {
         this.builder = builder;
+        this.referenceContentService = referenceContentService;
+        this.chatMemoryService = chatMemoryService;
     }
 
-    public ChatMemory getOrCreateMemory(String userId) {
-        return userMemories.computeIfAbsent(userId, id ->
-                MessageWindowChatMemory.builder().maxMessages(20).build()
-        );
-    }
+    public String chat(String prompt, String userId) {
+        try {
+            ChatMemory memory = chatMemoryService.getOrCreateMemory(userId);
+            ChatClient chatClient = builder
+                    .defaultAdvisors(MessageChatMemoryAdvisor.builder(memory).build())
+                    .build();
 
-    public ChatResponse chat(String prompt, String userId) {
-        ChatMemory memory = getOrCreateMemory(userId);
-        ChatClient chatClient = builder
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(memory).build())
-                .build();
-        String answer = chatClient.prompt(prompt).call().content();
-        return new ChatResponse(prompt, answer);
+            // Create system message with instructions to only use reference content
+            String finalPrompt = systemPrompt + referenceContentService.getReferenceContent();
+
+            // Use call with system message and user prompt
+            return chatClient.prompt()
+                    .system(finalPrompt)
+                    .user(prompt)
+                    .call()
+                    .content();
+//                    .replaceAll("\\r?\\n", "");
+
+        }catch (Exception e) {
+            log.error("Error during chat processing", e);
+            return "Sorry, I encountered an error processing your request.";
+        }
     }
 }

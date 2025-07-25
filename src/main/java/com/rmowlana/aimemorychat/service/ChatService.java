@@ -11,7 +11,7 @@ public class ChatService {
         this.aiService = aiService;
     }
 
-    public ChatResponse chat(String prompt, String userId) {
+    public String chat(String prompt, String userId) {
         return aiService.chat(prompt, userId);
     }
 }
