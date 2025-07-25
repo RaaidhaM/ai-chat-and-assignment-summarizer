@@ -14,8 +14,11 @@ import java.util.Map;
 @RequestMapping("/api/insights")
 public class InsightsController {
 
-    @Autowired
-    private InsightsService insightsService;
+    private final InsightsService insightsService;
+
+    public InsightsController(InsightsService insightsService) {
+        this.insightsService = insightsService;
+    }
 
     @GetMapping("/{assessmentId}")
     public ResponseEntity<Map<String, Object>> getInsights(@PathVariable String assessmentId) {
