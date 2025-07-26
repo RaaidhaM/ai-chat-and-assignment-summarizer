@@ -8,6 +8,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class InsightsService {
 
     public Map<String, Object> generateInsights(String assessmentId) {
         try {
-            // 1. Fetch assessment details
+            // 1. Fetch Assessment details
             HttpRequest assessmentRequest = HttpRequest.newBuilder()
                     .uri(URI.create(ASSESSMENT_API + assessmentId))
                     .GET()
@@ -45,67 +46,69 @@ public class InsightsService {
             HttpResponse<String> assessmentResponse = client.send(assessmentRequest, HttpResponse.BodyHandlers.ofString());
             Map<String, Object> assessmentData = mapper.readValue(assessmentResponse.body(), Map.class);
 
-            // 2. Mock Student Progress response
-            String studentProgressJson = """
-            {
-                "usersAssessments": [
-                    {
-                        "firstName": "Student15332",
-                        "lastName": "std",
-                        "loginName": "student15332@yopmail.com",
-                        "score": 0.1666666666666667,
-                        "timeSpent": 3447879
-                    },
-                    {
-                        "firstName": "student15261_1",
-                        "lastName": "std",
-                        "loginName": "student15261_1@yopmail.com",
-                        "score": 0.1766666666666667,
-                        "timeSpent": 0
-                    },
-                    {
-                        "firstName": "student15261_1",
-                        "lastName": "std",
-                        "loginName": "student15261_1@yopmail.com",
-                        "score": 0.6766666666666667,
-                        "timeSpent": 0
-                    },
-                    {
-                        "firstName": "student15261_1",
-                        "lastName": "std",
-                        "loginName": "student15261_1@yopmail.com",
-                        "score": 0.9766666666666667,
-                        "timeSpent": 0
-                    }
-                ],
-                "totalUserAssessments": 4
+            // Extract itemCardIds
+            List<Map<String, Object>> items = (List<Map<String, Object>>) assessmentData.get("items");
+
+            // 2. Fetch QuestionCard details for each itemCardId
+            List<Map<String, Object>> questionDetailsList = new ArrayList<>();
+            for (Map<String, Object> item : items) {
+                String itemCardId = (String) item.get("itemCardId");
+                String questionUrl = "https://was-app-qa.aws.wiley.com/was-questioncard/private/questioncards/" + itemCardId;
+
+                HttpRequest questionRequest = HttpRequest.newBuilder()
+                        .uri(URI.create(questionUrl))
+                        .GET()
+                        .build();
+
+                HttpResponse<String> questionResponse = client.send(questionRequest, HttpResponse.BodyHandlers.ofString());
+                Map<String, Object> questionData = mapper.readValue(questionResponse.body(), Map.class);
+
+                questionDetailsList.add(Map.of(
+                        "id", questionData.get("id"),
+                        "title", questionData.get("title"),
+                        "difficulty", questionData.get("difficulty"),
+                        "intent", questionData.get("intent")
+                ));
             }
-            """;
+
+            // 3. Mock Student Progress (replace later with real API)
+            String studentProgressJson = """
+                    {
+                        "usersAssessments": [
+                            {"firstName": "Student15332","lastName":"std","loginName":"student15332@yopmail.com","score":0.1666,"timeSpent":3447879},
+                            {"firstName": "student15261_1","lastName":"std","loginName":"student15261_1@yopmail.com","score":0.0,"timeSpent":0}
+                        ],
+                        "totalUserAssessments": 2
+                    }
+                    """;
             Map<String, Object> studentProgressData = mapper.readValue(studentProgressJson, Map.class);
 
-            // 3. Prepare strict GPT-4 prompt to force JSON response
+            // 4. Prepare Enhanced Prompt for GPT-4
             String prompt = """
-            Analyze the following assessment and student progress data and return ONLY JSON in this exact format:
-            {
-              "most_challenging_questions": [{"question": "", "reason": ""}],
-              "common_misconceptions": [{"pattern": "", "detail": ""}],
-              "areas_of_class_strength": [{"area": "", "detail": ""}],
-              "ai_suggested_next_steps": ["", ""]
-            }
+                    Analyze the following data and return ONLY JSON in this format:
+                    {
+                      "most_challenging_questions": [{"question": "", "reason": ""}],
+                      "common_misconceptions": [{"pattern": "", "detail": ""}],
+                      "areas_of_class_strength": [{"area": "", "detail": ""}],
+                      "ai_suggested_next_steps": ["", ""]
+                    }
 
-            Do not include any explanation, text, or markdown outside this JSON.
+                    Data:
+                    Assessment Info: """ + mapper.writeValueAsString(assessmentData) + "\n"
+                    + "Question Details: " + mapper.writeValueAsString(questionDetailsList) + "\n"
+                    + "Student Progress: " + mapper.writeValueAsString(studentProgressData);
 
-            Data:
-            """ + mapper.writeValueAsString(assessmentData) + "\n"
-                    + mapper.writeValueAsString(studentProgressData);
-
-            // 4. Call Azure GPT-4 API
+            // 5. Call GPT-4
             String gptResponse = callAzureGPT4(prompt);
 
-            // 5. Parse GPT-4 JSON response
+            // 6. Parse GPT JSON
             Map<String, Object> insightsMap;
             try {
-                insightsMap = mapper.readValue(gptResponse, Map.class);
+                String cleanJson = gptResponse
+                        .replace("```json", "")
+                        .replace("```", "")
+                        .trim();
+                insightsMap = mapper.readValue(cleanJson, Map.class);
             } catch (Exception e) {
                 insightsMap = Map.of("error", "Failed to parse GPT response", "rawResponse", gptResponse);
             }
@@ -116,6 +119,7 @@ public class InsightsService {
             throw new RuntimeException("Error generating insights", e);
         }
     }
+
 
     private String callAzureGPT4(String prompt) throws Exception {
         Map<String, Object> payload = new HashMap<>();
