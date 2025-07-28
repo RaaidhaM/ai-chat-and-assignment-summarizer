@@ -51,7 +51,8 @@ public class AIService {
                     .content();
 
             // Remove markdown bold "**" if present
-            String plainContent = rawContent.replace("**", "");
+            String plainContent = rawContent.replace("**", "").replace("\n", "<br>");
+
 
             // Wrap it into JSON format: {"response": "..."}
             Map<String, String> jsonResponse = new HashMap<>();
