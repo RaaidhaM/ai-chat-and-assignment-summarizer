@@ -1,5 +1,6 @@
 package com.rmowlana.aimemorychat.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -9,17 +10,24 @@ import org.springframework.stereotype.Service;
 
 import com.rmowlana.aimemorychat.dto.ChatResponse;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @Slf4j
 public class AIService {
+
     private final ChatClient.Builder builder;
     private final ReferenceContentService referenceContentService;
     private final ChatMemoryService chatMemoryService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Value("${ai.system.prompt.template}")
     private String systemPrompt;
 
-    public AIService(ChatClient.Builder builder, ReferenceContentService referenceContentService, ChatMemoryService chatMemoryService) {
+    public AIService(ChatClient.Builder builder,
+                     ReferenceContentService referenceContentService,
+                     ChatMemoryService chatMemoryService) {
         this.builder = builder;
         this.referenceContentService = referenceContentService;
         this.chatMemoryService = chatMemoryService;
@@ -32,20 +40,28 @@ public class AIService {
                     .defaultAdvisors(MessageChatMemoryAdvisor.builder(memory).build())
                     .build();
 
-            // Create system message with instructions to only use reference content
+            // Combine system prompt and reference content
             String finalPrompt = systemPrompt + referenceContentService.getReferenceContent();
 
-            // Use call with system message and user prompt
-            return chatClient.prompt()
+            // Get AI response content
+            String rawContent = chatClient.prompt()
                     .system(finalPrompt)
                     .user(prompt)
                     .call()
                     .content();
-//                    .replaceAll("\\r?\\n", "");
 
-        }catch (Exception e) {
+            // Remove markdown bold "**" if present
+            String plainContent = rawContent.replace("**", "");
+
+            // Wrap it into JSON format: {"response": "..."}
+            Map<String, String> jsonResponse = new HashMap<>();
+            jsonResponse.put("response", plainContent);
+
+            return objectMapper.writeValueAsString(jsonResponse);
+
+        } catch (Exception e) {
             log.error("Error during chat processing", e);
-            return "Sorry, I encountered an error processing your request.";
+            return "{\"response\": \"Sorry, I encountered an error processing your request.\"}";
         }
     }
 }
